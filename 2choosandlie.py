@@ -1,5 +1,6 @@
 import random
 
+
 class Player:
     def __init__(self, name):
         self.name = name
@@ -21,35 +22,40 @@ def game(player):
         fact = input(f"Fact {index + 1} :")
         answer.append(fact)
         index += 1
-    print(answer)
+
 
     lie = ai_generate_lie()
     answer.append(lie)
     
+
     print("\nHere are the statements:")
     for i, statement in enumerate(answer):
-        print(f"{i + 1}. {statement}")
+        print(f"{i + 1}. {statement} \n")
+
 
     guess = int(input("Which statement is a lie? "))
+    while guess != answer[guess -1]:
+        print("That is incorrect please guess again:\n")
+        guess = int(input("Which statement is a lie? "))
 
-    if answer[guess - 1] == lie:
-        print("You are correct!")
-        player.add_score()
+        if answer[guess - 1] == lie:
+            print("You are correct!")
+            player.add_score()
+            break
+     
 
-#the facts could be prompts of pictures representing the truths and a lie
-#choose the lie and the player gets a point
-#create a train on js, going up and down,
-#stickman represent people
-#create a mobile view
-#play with ai feature, ai generates two truths and a lie you try to guess the lie
+def generate_pictures(questions):
+    for item in range(0, len(questions) -1):
+        print(questions[item])
 
 def ai_generate_lie():
-    lie = "I have a pet dragon"
+    lie = "I hate Hackathons"
     return lie
 
 def test_player():
     player = Player("Alice")
     player.add_score()
+    print(player.score)
     game(player)
 
 test_player()
